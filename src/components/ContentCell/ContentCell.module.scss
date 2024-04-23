@@ -1,0 +1,43 @@
+.contentCellContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  .slope, .percentChange, .streams {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: bold;
+    svg {
+      color: #000000;
+    }
+  }
+  .percentChange, .streams {
+    span {
+      font-size: 12px;
+      height: 16px;
+    }
+    svg {
+      height: 16px;
+      width: 16px;
+    }
+  }
+  .slope {
+    span {
+      font-size: 16px;
+      height: 24px;
+    }
+    svg {
+      height: 24px;
+      width: 24px;
+    }
+  }
+  .streams {
+    color: #5b5b5b;
+  }
+  .green {
+    color: #18A689;
+  }
+  .red {
+    color: #cd6a6a;
+  }
+}
