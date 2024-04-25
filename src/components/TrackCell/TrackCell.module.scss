@@ -19,7 +19,7 @@
       padding: 0 .3em;
       width: fit-content;
     }
-    .trackTitle, .trackArtist, .trackDate {
+    .trackTitle, .trackInfo {
       cursor: pointer;
       font-weight: bold;
       font-size: 14px;
@@ -31,7 +31,7 @@
     .trackTitle {
       color: #353940;
     }
-    .trackArtist, .trackDate {
+    .trackInfo {
       color: #8F8F8F;
     }
   }

@@ -3,11 +3,18 @@ import 'styles/index.scss';
 import React from 'react';
 import Table from 'antd/es/table';
 
-import { columns } from 'utils';
-import { mockDataSource } from 'utils/mock';
+import { getMappedData } from 'utils';
 
-function SlopesTable() {
-  return <Table scroll={{ x: '600px', y: 'calc(100vh - 200px)' }} dataSource={mockDataSource} columns={columns} />;
+import { IBEData } from 'types';
+
+interface ISlopesTableProps {
+  data?: IBEData[];
+}
+
+function SlopesTable(props: ISlopesTableProps) {
+  const { data, columns } = getMappedData(props.data);
+
+  return <Table scroll={{ x: '600px', y: 'calc(100vh - 200px)' }} dataSource={data} columns={columns} />;
 }
 
 export default SlopesTable;

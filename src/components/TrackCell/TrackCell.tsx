@@ -4,24 +4,25 @@ import styles from './TrackCell.module.scss';
 
 import { IDataSource } from 'types';
 
-const TrackCell = ({ artists, date, title, explicit, img }: IDataSource['track']) => {
+const TrackCell = ({ artist, productTitle, date, title, explicit, img }: IDataSource['track']) => {
   return (
     <div className={styles.trackCellContainer}>
       {img && <img src={img} alt="cover" />}
       <div className={styles.trackContent}>
         <span className={styles.trackTitle}>{title}</span>
-        <div className={styles.explicitContainer}>{explicit ? 'Explicit' : 'Neither'}</div>
+        <div className={styles.explicitContainer}>{explicit}</div>
         <div>
-          {artists.map((artist) => (
-            <>
-              <span className={styles.trackArtist} key={artist}>
-                {' '}
-                {artist}
-              </span>
-              <span> · </span>
-            </>
-          ))}
-          <span className={styles.trackDate}> {date}</span>
+          {artist && (
+            <span className={styles.trackInfo}>
+              {artist} {productTitle || date ? '·' : ''}
+            </span>
+          )}
+          {productTitle && (
+            <span className={styles.trackInfo}>
+              {productTitle} {date ? '·' : ''}
+            </span>
+          )}
+          {date && <span className={styles.trackInfo}>{date}</span>}
         </div>
       </div>
     </div>

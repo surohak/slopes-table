@@ -1,6 +1,9 @@
 import { IDataSource } from 'types';
 
 export const getChartOption = (data: IDataSource['chart']) => {
+  const keys = Object.keys(data).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+  const values = keys.map((key) => data[key]);
+
   return {
     grid: {
       left: 0,
@@ -12,6 +15,7 @@ export const getChartOption = (data: IDataSource['chart']) => {
     xAxis: {
       show: false,
       type: 'category',
+      data: keys,
     },
     yAxis: {
       type: 'value',
@@ -21,7 +25,7 @@ export const getChartOption = (data: IDataSource['chart']) => {
     },
     series: [
       {
-        data,
+        data: values,
         type: 'line',
         smooth: true,
         itemStyle: { color: '#000000' },

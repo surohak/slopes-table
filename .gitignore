@@ -31,3 +31,5 @@ yarn-error.log*
 /blob-report/
 /playwright/.cache/
 /allure-results/
+
+/src/dev
