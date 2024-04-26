@@ -1,51 +1,70 @@
 import React from 'react';
 import { BarChartOutlined, LineChartOutlined, PercentageOutlined } from '@ant-design/icons';
+import styled from '@emotion/styled';
 import { Tooltip } from 'antd';
-import clsx from 'clsx';
 
-import styles from './ContentCell.module.scss';
-
-import { IDataSourceContent } from 'types';
+import { IDataSourceContent } from '../../types';
 
 interface IContentCellProps extends IDataSourceContent {
   title?: string;
   img?: string;
 }
 
+const StyledContentCellContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+interface StyledInfoWithIconProps {
+  isGreen?: boolean;
+  isRed?: boolean;
+  isStreams?: boolean;
+  isSlope?: boolean;
+}
+
+const StyledInfoWithIcon = styled.div<StyledInfoWithIconProps>`
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-weight: bold;
+  color: ${({ isGreen, isRed, isStreams }: StyledInfoWithIconProps) =>
+    isGreen ? '#18A689' : isRed ? '#cd6a6a' : isStreams ? '#5b5b5b' : '#000000'};
+  svg {
+    color: #000000;
+    width: ${({ isSlope }: StyledInfoWithIconProps) => (isSlope ? '24px' : '16px')};
+    height: ${({ isSlope }: StyledInfoWithIconProps) => (isSlope ? '24px' : '16px')};
+  }
+  span {
+    font-size: ${({ isSlope }: StyledInfoWithIconProps) => (isSlope ? '12px' : '16px')};
+    height: ${({ isSlope }: StyledInfoWithIconProps) => (isSlope ? '16px' : '24px')};
+  }
+`;
+
 const ContentCell = ({ slope, streams, percentChange, title, img }: IContentCellProps) => {
   return (
-    <div className={styles.contentCellContainer}>
-      {title && <span className={styles.contentCellTitle}>{title}</span>}
+    <StyledContentCellContainer>
+      {title && <span>{title}</span>}
       {img && <img src={img} alt="logo" />}
       <Tooltip title="SLOPE">
-        <div
-          className={clsx(styles.slope, {
-            [styles.green]: slope.includes('+'),
-            [styles.red]: slope.includes('-'),
-          })}
-        >
+        <StyledInfoWithIcon isSlope isGreen={slope.includes('+')} isRed={slope.includes('-')}>
           <LineChartOutlined />
           <span>{slope}</span>
-        </div>
+        </StyledInfoWithIcon>
       </Tooltip>
       <Tooltip title="PERCENT CHANGE">
-        <div
-          className={clsx(styles.percentChange, {
-            [styles.green]: percentChange.includes('+'),
-            [styles.red]: percentChange.includes('-'),
-          })}
-        >
+        <StyledInfoWithIcon isGreen={percentChange.includes('+')} isRed={percentChange.includes('-')}>
           <PercentageOutlined />
           <span>{percentChange}</span>
-        </div>
+        </StyledInfoWithIcon>
       </Tooltip>
       <Tooltip title="TOTAL STREAMS">
-        <div className={styles.streams}>
+        <StyledInfoWithIcon isStreams>
           <BarChartOutlined />
           <span>{streams}</span>
-        </div>
+        </StyledInfoWithIcon>
       </Tooltip>
-    </div>
+    </StyledContentCellContainer>
   );
 };
 

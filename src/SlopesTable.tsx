@@ -1,11 +1,8 @@
-import 'styles/index.scss';
-
 import React from 'react';
 import Table from 'antd/es/table';
 
-import { getMappedData } from 'utils';
-
-import { IBEData } from 'types';
+import { IBEData } from './types';
+import { getMappedData } from './utils';
 
 interface ISlopesTableProps {
   data?: IBEData[];

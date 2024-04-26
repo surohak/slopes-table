@@ -1,14 +1,17 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import ReactEcharts from 'echarts-for-react';
 
-import { getChartOption } from 'components/ChartCell/ChartCell.utils';
+import { IDataSource } from '../../types';
+import { getChartOption } from './ChartCell.utils';
 
-import styles from './ChartCell.module.scss';
-
-import { IDataSource } from 'types';
+const StyledReactEcharts = styled(ReactEcharts)`
+  height: 100px;
+  width: 100%;
+`;
 
 const ChartCell = ({ data }: { data: IDataSource['chart'] }) => {
-  return <ReactEcharts option={getChartOption(data)} className={styles.reactEcharts} style={{ height: 100 }} />;
+  return <StyledReactEcharts option={getChartOption(data)} />;
 };
 
 export default ChartCell;

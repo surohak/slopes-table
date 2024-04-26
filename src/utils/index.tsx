@@ -1,12 +1,9 @@
 import React from 'react';
 import { ColumnsType } from 'antd/es/table';
 
-import ChartCell from 'components/ChartCell';
-import ContentCell from 'components/ContentCell';
-import TrackCell from 'components/TrackCell';
-
-import { defaultHeaderData } from 'utils/mock';
-
+import ChartCell from '../components/ChartCell';
+import ContentCell from '../components/ContentCell';
+import TrackCell from '../components/TrackCell';
 import {
   ArrayOfKeyStringValueStringType,
   IBEDailyStream,
@@ -15,7 +12,8 @@ import {
   IDataSourceContent,
   KeyStringValueDataSourceContent,
   KeyStringValueNumberType,
-} from 'types';
+} from '../types';
+import { defaultHeaderData } from './mock';
 
 export const columns = [
   {

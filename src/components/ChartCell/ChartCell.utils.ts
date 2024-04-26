@@ -1,4 +1,4 @@
-import { IDataSource } from 'types';
+import { IDataSource } from '../../types';
 
 export const getChartOption = (data: IDataSource['chart']) => {
   const keys = Object.keys(data).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
