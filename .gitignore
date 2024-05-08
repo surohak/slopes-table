@@ -32,4 +32,4 @@ yarn-error.log*
 /playwright/.cache/
 /allure-results/
 
-/src/dev
+/src/SlopesTable/dev

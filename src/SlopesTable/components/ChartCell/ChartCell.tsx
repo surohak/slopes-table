@@ -6,7 +6,7 @@ import { IDataSource } from '../../types';
 import { getChartOption } from './ChartCell.utils';
 
 const StyledReactEcharts = styled(ReactEcharts)`
-  height: 100px;
+  height: 100px !important;
   width: 100%;
 `;
 

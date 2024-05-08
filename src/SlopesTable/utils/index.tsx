@@ -1,5 +1,6 @@
 import React from 'react';
 import { ColumnsType } from 'antd/es/table';
+import { mockDataBE } from 'SlopesTable/dev';
 
 import ChartCell from '../components/ChartCell';
 import ContentCell from '../components/ContentCell';
@@ -98,7 +99,9 @@ const getDailyStreamsWithContentCellData = (data: ArrayOfKeyStringValueStringTyp
   }, {});
 };
 
-export const getMappedData = (data: IBEData[] = []): { columns: ColumnsType<IDataSource>; data: IDataSource[] } => {
+export const getMappedData = (
+  data: IBEData[] = mockDataBE
+): { columns: ColumnsType<IDataSource>; data: IDataSource[] } => {
   const newColumns = [...columns];
 
   const { newData } = data.reduce(

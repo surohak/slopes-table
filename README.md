@@ -1,7 +1,3 @@
-# Getting Started with Create React SlopesTable
-
-This project was bootstrapped with [Create React SlopesTable](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
