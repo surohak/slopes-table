@@ -36,25 +36,6 @@ export const getChartOption = (data = mockDataBE) => {
         a.data.reduce((acc: number, item: number) => acc + item, 0)
     );
 
-  // .map((serie, index, arr) => {
-  //   if (index === arr.length - 1) {
-  //     serie.label = {
-  //       position: 'top',
-  //       formatter: (params: any) => {
-  //         let val = 0;
-  //
-  //         arr.forEach((s: any) => {
-  //           val += s.data[params.dataIndex];
-  //         });
-  //
-  //         return val;
-  //       },
-  //     };
-  //   }
-  //
-  //   return serie;
-  // });
-
   return {
     grid: {
       left: 0,
