@@ -6,15 +6,16 @@ import { getChartOption } from './utils';
 
 interface IBarChartProps {
   data?: IBEData[];
+  height?: number;
 }
 
-const StyledReactEcharts = styled(ReactEcharts)`
-  height: 700px !important;
+const StyledReactEcharts = styled(ReactEcharts)<{ height?: number }>`
+  height: ${({ height }) => height || 700}px !important;
   width: 100%;
 `;
 
-const BarChart = ({ data }: IBarChartProps) => {
-  return <StyledReactEcharts option={getChartOption(data)} />;
+const BarChart = ({ data, height }: IBarChartProps) => {
+  return <StyledReactEcharts height={height} option={getChartOption(data)} />;
 };
 
 export default BarChart;
