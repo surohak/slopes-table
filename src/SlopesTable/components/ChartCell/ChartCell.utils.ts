@@ -7,7 +7,7 @@ export const getChartOption = (data: IDataSource['chart']) => {
   return {
     grid: {
       left: 0,
-      top: 0,
+      top: 10,
       right: 0,
       bottom: 0,
     },

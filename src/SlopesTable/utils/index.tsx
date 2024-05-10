@@ -21,7 +21,7 @@ export const columns = [
     title: '#',
     dataIndex: 'key',
     key: 'key',
-    width: 30,
+    width: 40,
   },
   {
     title: 'Track',
