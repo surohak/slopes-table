@@ -33,10 +33,6 @@ export const getChartOption = (data = mockDataBE) => {
           name: key,
           type: 'bar',
           stack: 'total',
-          label: {
-            show: true,
-            position: 'right',
-          },
           emphasis: {
             focus: 'series',
           },
@@ -54,7 +50,22 @@ export const getChartOption = (data = mockDataBE) => {
       (a, b) =>
         b.data.reduce((acc: number, item: number) => acc + item, 0) -
         a.data.reduce((acc: number, item: number) => acc + item, 0)
-    );
+    )
+    .map((serie, index, arr) => {
+      if (index === arr.length - 1) {
+        serie.label = {
+          show: true,
+          position: 'top',
+          formatter: (params: any) => {
+            return numberFormatter(
+              series.reduce((acc: number, item: any) => acc + (item.data[params.dataIndex] || 0), 0)
+            );
+          },
+        };
+      }
+
+      return serie;
+    });
 
   return {
     grid: {
@@ -69,6 +80,7 @@ export const getChartOption = (data = mockDataBE) => {
       axisPointer: {
         type: 'shadow',
       },
+      valueFormatter: numberFormatter,
     },
     // Adding total legend
     graphic: [
@@ -95,10 +107,20 @@ export const getChartOption = (data = mockDataBE) => {
             left: 30,
             top: 0,
             style: {
-              text: `Total ${numberFormatter(Math.floor(data.reduce((acc, item) => acc + item.SALES, 0)))}`,
+              text: 'Total',
               fill: 'black',
               fontSize: '12px',
               fontWeight: 'bold',
+            },
+          },
+          {
+            type: 'text',
+            left: 60,
+            top: 0,
+            style: {
+              text: `$${numberFormatter(Math.floor(data.reduce((acc, item) => acc + item.SALES, 0)))}`,
+              fill: 'black',
+              fontSize: '12px',
             },
           },
         ],
@@ -107,14 +129,21 @@ export const getChartOption = (data = mockDataBE) => {
     legend: [
       {
         formatter: function (name: string) {
-          return `${name} ${numberFormatter(
+          const value = numberFormatter(
             series.find((serie) => serie.name === name).data.reduce((acc: number, item: number) => acc + item, 0)
-          )}`;
+          );
+
+          return `${name} {b|$${value}}`;
         },
         textStyle: {
           fontStyle: 'bold',
           color: 'black',
           fontSize: 12,
+          rich: {
+            b: {
+              fontStyle: 'normal',
+            },
+          },
         },
       },
     ],
