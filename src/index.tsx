@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import SlopesTable from './SlopesTable';
-// import BarChart from './BarChart';
+// import SlopesTable from './SlopesTable';
+import BarChart from './BarChart';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(<SlopesTable height={300} />);
+root.render(<BarChart height={700} />);

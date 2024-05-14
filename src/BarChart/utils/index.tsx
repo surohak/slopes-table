@@ -1,5 +1,25 @@
 import { mockDataBE } from '../dev';
 
+export function numberFormatter(num: number, digits = 2) {
+  const lookup = [
+    { value: 1, symbol: '' },
+    { value: 1e3, symbol: 'k' },
+    { value: 1e6, symbol: 'M' },
+    { value: 1e9, symbol: 'G' },
+    { value: 1e12, symbol: 'T' },
+    { value: 1e15, symbol: 'P' },
+    { value: 1e18, symbol: 'E' },
+  ];
+  const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
+
+  const item = lookup
+    .slice()
+    .reverse()
+    .find((item) => num >= item.value);
+
+  return item ? (num / item.value).toFixed(digits).replace(regexp, '').concat(item.symbol) : '0';
+}
+
 export const getChartOption = (data = mockDataBE) => {
   const xAxisData = [...new Set(data?.map((item) => new Date(item.STATEMENT_DATE).toLocaleDateString()))];
 
@@ -56,7 +76,7 @@ export const getChartOption = (data = mockDataBE) => {
         type: 'group',
         id: 'legendGroup',
         left: 20,
-        top: 20,
+        top: 6,
         children: [
           {
             type: 'rect',
@@ -75,7 +95,7 @@ export const getChartOption = (data = mockDataBE) => {
             left: 30,
             top: 0,
             style: {
-              text: `Total: \n\n ${Math.floor(data.reduce((acc, item) => acc + item.SALES, 0))}`,
+              text: `Total ${numberFormatter(Math.floor(data.reduce((acc, item) => acc + item.SALES, 0)))}`,
               fill: 'black',
               fontSize: '12px',
               fontWeight: 'bold',
@@ -87,19 +107,14 @@ export const getChartOption = (data = mockDataBE) => {
     legend: [
       {
         formatter: function (name: string) {
-          return `${name} \n\n {count|${series
-            .find((serie) => serie.name === name)
-            .data.reduce((acc: number, item: number) => acc + item, 0)}}`;
+          return `${name} ${numberFormatter(
+            series.find((serie) => serie.name === name).data.reduce((acc: number, item: number) => acc + item, 0)
+          )}`;
         },
         textStyle: {
-          rich: {
-            count: {
-              align: 'right',
-              color: 'black',
-              fontSize: 12,
-              fontStyle: 'bold',
-            },
-          },
+          fontStyle: 'bold',
+          color: 'black',
+          fontSize: 12,
         },
       },
     ],
